@@ -1,0 +1,12 @@
+[project]
+name = "theagency"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "gorilla-cli>=0.0.10",
+    "langgraph-supervisor>=0.0.10",
+    "langgraph-swarm>=0.0.7",
+    "pinecone>=6.0.2",
+]
