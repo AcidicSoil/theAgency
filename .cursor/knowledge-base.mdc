@@ -1,0 +1,205 @@
+---
+description: Reusable solutions and patterns for common development scenarios
+globs:
+alwaysApply: false
+---
+
+# Knowledge Base
+
+This document contains reusable solutions, patterns, and best practices for common development scenarios encountered in this project.
+
+## Knowledge Entry Format
+
+```markdown
+## [KB:TOPIC:SUBTOPIC]
+
+### Problem
+Clear statement of the problem this solution addresses
+
+### Solution
+Detailed solution with code examples where applicable
+
+### When to Use
+Context in which this solution is appropriate
+
+### Limitations
+Any limitations or caveats to be aware of
+
+### Related Knowledge
+- [KB:RELATED-TOPIC-1]
+- [KB:RELATED-TOPIC-2]
+```
+
+## Development Patterns
+
+### [KB:TOOLING:COMMAND-EXECUTION]
+
+#### Problem
+Running shell commands consistently across different environments with proper error handling.
+
+#### Solution
+Use the standardized command execution pattern:
+
+```javascript
+// Standardized command execution with error handling
+function executeCommand(command, options = {}) {
+  const { shouldThrow = true, timeout = 30000 } = options;
+
+  console.log(`Executing: ${command}`);
+
+  try {
+    // Execute command
+    const result = childProcess.execSync(command, {
+      encoding: 'utf8',
+      timeout,
+      stdio: ['pipe', 'pipe', 'pipe']
+    });
+
+    console.log(`Command succeeded`);
+    return { success: true, output: result };
+  } catch (error) {
+    console.error(`Command failed: ${error.message}`);
+
+    // Log to error registry
+    logError('COMMAND_ERROR', error, { command, options });
+
+    if (shouldThrow) {
+      throw error;
+    }
+
+    return {
+      success: false,
+      error: error.message,
+      code: error.code
+    };
+  }
+}
+```
+
+#### When to Use
+- When executing shell commands from JavaScript/Node.js
+- When you need consistent error handling and logging
+- For cross-platform command execution
+
+#### Limitations
+- May not capture all command output if it exceeds buffer limits
+- Not suitable for long-running processes (use spawn instead)
+
+#### Related Knowledge
+- [KB:TOOLING:CROSS-PLATFORM-COMMANDS]
+- [KB:ERROR-HANDLING:LOGGING]
+
+### [KB:UI:RESPONSIVE-LAYOUT]
+
+#### Problem
+Creating responsive layouts that work consistently across different screen sizes and devices.
+
+#### Solution
+Use a standardized approach to responsive layouts:
+
+```javascript
+// Responsive container component
+function ResponsiveContainer({ children, className = '', ...props }) {
+  return (
+    <div
+      className={`
+        w-full
+        max-w-7xl
+        mx-auto
+        px-4 sm:px-6 lg:px-8
+        ${className}
+      `}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
+
+// Usage example
+function Page() {
+  return (
+    <ResponsiveContainer>
+      <h1>Page Title</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {/* Content */}
+      </div>
+    </ResponsiveContainer>
+  );
+}
+```
+
+#### When to Use
+- For page layouts and container components
+- When you need consistent padding and max-width constraints
+- To ensure mobile-friendly designs
+
+#### Limitations
+- May need customization for very specialized layouts
+- Container approach may not be suitable for full-bleed designs
+
+#### Related Knowledge
+- [KB:UI:GRID-SYSTEM]
+- [KB:UI:BREAKPOINTS]
+
+## Common Best Practices
+
+### [KB:PERFORMANCE:OPTIMIZATION]
+
+#### Problem
+Optimizing application performance for better user experience.
+
+#### Solution
+Follow these key performance optimization techniques:
+
+1. **Code splitting and lazy loading**:
+```javascript
+// Lazy load components
+const LazyComponent = React.lazy(() => import('./LazyComponent'));
+
+function App() {
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      <LazyComponent />
+    </Suspense>
+  );
+}
+```
+
+2. **Memoization for expensive calculations**:
+```javascript
+// Use useMemo for expensive calculations
+const expensiveResult = useMemo(() => {
+  return performExpensiveCalculation(a, b);
+}, [a, b]);
+```
+
+3. **Image optimization**:
+```javascript
+// Optimized image component
+function OptimizedImage({ src, alt, width, height }) {
+  return (
+    <img
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      loading="lazy"
+      decoding="async"
+    />
+  );
+}
+```
+
+#### When to Use
+- For any user-facing application
+- When performance metrics indicate slow loading or interaction
+- In components that render frequently or perform expensive operations
+
+#### Limitations
+- May increase code complexity
+- Trade-offs between code organization and performance
+
+#### Related Knowledge
+- [KB:PERFORMANCE:MEASUREMENT]
+- [KB:PERFORMANCE:RENDERING]

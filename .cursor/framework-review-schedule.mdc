@@ -1,0 +1,152 @@
+---
+description: Schedule and criteria for governance framework effectiveness reviews
+globs:
+alwaysApply: false
+---
+
+# Governance Framework Effectiveness Review Schedule
+
+This document outlines the schedule and criteria for reviewing the effectiveness of the project's governance framework.
+
+## Review Schedule
+
+| Review | Date | Participants | Status |
+|--------|------|--------------|--------|
+| Initial Review | 2023-04-23 | Project Team | 🔴 Not Started |
+| 3-Month Review | 2023-06-23 | Project Team | 🔴 Not Started |
+| 6-Month Review | 2023-09-23 | Project Team, Stakeholders | 🔴 Not Started |
+| Annual Review | 2024-03-23 | Project Team, Stakeholders | 🔴 Not Started |
+
+## Review Criteria
+
+Each review will evaluate the governance framework against the following criteria:
+
+### Efficiency
+
+- Time spent on documentation vs. implementation
+- Decision-making speed
+- Task completion velocity
+- Tool call efficiency
+
+### Compliance
+
+- Adherence to established processes
+- Documentation completeness
+- Error handling consistency
+- Data access logging coverage
+
+### Developer Experience
+
+- Framework learning curve
+- Documentation clarity
+- Process friction points
+- Developer satisfaction
+
+### Adaptability
+
+- Ease of modifying framework components
+- Response to new requirements
+- Integration with new tools and workflows
+
+## Review Process
+
+### Preparation
+
+1. Collect metrics from the past period:
+   - Task completion rates
+   - Documentation coverage
+   - Error resolution times
+   - Developer feedback
+
+2. Prepare review materials:
+   - Metrics summary
+   - Key challenges identified
+   - Improvement suggestions
+
+### Review Meeting
+
+1. Review metrics and identify trends (30 minutes)
+2. Discuss key challenges and successes (45 minutes)
+3. Evaluate each framework component (60 minutes)
+4. Develop improvement proposals (45 minutes)
+
+### Post-Review
+
+1. Document findings in decision-logs.mdc
+2. Implement approved changes to framework
+3. Update framework documentation
+4. Communicate changes to all stakeholders
+
+## Initial Review Agenda (2023-04-23)
+
+### Agenda
+
+1. Framework Component Review
+   - Decision Management
+   - Version Control Integration
+   - Time Management
+   - Knowledge Persistence
+   - Error Recovery
+   - Tool Call Optimization
+
+2. Key Metrics Assessment
+   - Documentation coverage: Target 80%+
+   - Process adoption: Target 70%+
+   - Task velocity: Compare pre/post framework
+   - Error resolution time: Target 20% improvement
+
+3. Improvement Planning
+   - Identify high-impact improvements
+   - Prioritize implementation
+   - Assign ownership
+   - Set timeline for changes
+
+### Preparation Checklist
+
+- [ ] Collect metrics on framework usage
+- [ ] Survey team for feedback on framework
+- [ ] Document key challenges and successes
+- [ ] Prepare review presentation
+- [ ] Schedule review meeting with all participants
+
+## Documentation Template
+
+```markdown
+# Framework Effectiveness Review: [YYYY-MM-DD]
+
+## Metrics Summary
+
+| Metric | Previous | Current | Change | Target | Status |
+|--------|----------|---------|--------|--------|--------|
+| [Metric 1] | [Value] | [Value] | [+/-]% | [Target] | ✅/❌ |
+| [Metric 2] | [Value] | [Value] | [+/-]% | [Target] | ✅/❌ |
+
+## Component Effectiveness
+
+### Decision Management
+- **Score**: [1-10]
+- **Strengths**: [List strengths]
+- **Weaknesses**: [List weaknesses]
+- **Improvement Actions**: [List actions]
+
+### Version Control Integration
+- **Score**: [1-10]
+- **Strengths**: [List strengths]
+- **Weaknesses**: [List weaknesses]
+- **Improvement Actions**: [List actions]
+
+## Overall Assessment
+
+[Summary assessment of framework effectiveness]
+
+## Improvement Plan
+
+| Action | Owner | Deadline | Priority |
+|--------|-------|----------|----------|
+| [Action 1] | [Name] | [Date] | [High/Medium/Low] |
+| [Action 2] | [Name] | [Date] | [High/Medium/Low] |
+
+## Next Review Date
+
+[YYYY-MM-DD]
+```

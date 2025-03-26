@@ -1,3 +1,7 @@
 {
-	"makefile.configureOnOpen": false
+	"makefile.configureOnOpen": false,
+	"CodeGPT.apiKey": "Ollama",
+	"[jsonc]": {
+		"editor.defaultFormatter": "VisualStudioExptTeam.vscodeintellicode"
+	}
 }

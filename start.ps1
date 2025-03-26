@@ -1,1 +1,0 @@
- uvx --from mcpdoc mcpdoc     --urls LangGraph:https://langchain-ai.github.io/langgraph/llms.txt     --transport sse     --port 8082     --host localhost

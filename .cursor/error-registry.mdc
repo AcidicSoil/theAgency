@@ -1,0 +1,101 @@
+---
+description: Registry of encountered errors with context and resolution steps
+globs:
+alwaysApply: false
+---
+
+# Error Registry
+
+This document catalogs errors encountered during development along with their context, resolution steps, and prevention strategies.
+
+## Error Documentation Format
+
+```markdown
+## Error: [ERROR-CODE]
+- Timestamp: YYYY-MM-DD HH:MM:SS
+- Component: [Component/System]
+- Severity: [Critical | High | Medium | Low]
+
+### Error Message
+```
+Exact error message text
+```
+
+### Context
+Brief description of what was happening when the error occurred
+
+### Root Cause
+Explanation of what caused the error
+
+### Resolution Steps
+1. [Step one]
+2. [Step two]
+3. [Step three]
+
+### Prevention
+How to prevent this error in the future
+
+### Related Errors
+- [ERROR-CODE-1]
+- [ERROR-CODE-2]
+```
+
+## Common Error Patterns
+
+### Function Error Handling Pattern
+```javascript
+function safeOperation(params) {
+  try {
+    // Operation logic
+    return result;
+  } catch (error) {
+    // Log to error registry
+    logError('OPERATION_ERROR', error, params);
+
+    // Graceful degradation
+    return fallbackValue;
+  }
+}
+```
+
+### Command Error Handling Pattern
+```bash
+# Run command with error handling
+command_with_args || {
+  echo "Error: Command failed with exit code $?" >&2
+  echo "Context: Running in $(pwd) with args: $@" >&2
+  exit 1
+}
+```
+
+## Project Errors
+
+### Error: TOOL-CALL-001
+- Timestamp: 2023-03-23 21:00:00
+- Component: Tool Call System
+- Severity: Medium
+
+#### Error Message
+```
+Tool call failed: Maximum number of tool calls exceeded
+```
+
+#### Context
+AI assistant was executing a complex task requiring multiple tool calls when it reached the system-imposed limit.
+
+#### Root Cause
+Inefficient task planning led to exceeding the maximum allowed number of tool calls (25).
+
+#### Resolution Steps
+1. Break the task into smaller sub-tasks
+2. Optimize tool call usage by batching similar operations
+3. Prioritize critical operations to complete within limits
+4. Resume in a new session with clear continuation point
+
+#### Prevention
+- Plan tool call usage before starting complex tasks
+- Implement tool call tracking in the .cursorrules scratchpad
+- Use the Tool Call Optimization pattern from enhanced-governance-framework.mdc
+
+#### Related Errors
+- TOOL-CALL-002

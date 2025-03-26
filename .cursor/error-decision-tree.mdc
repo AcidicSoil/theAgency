@@ -1,0 +1,345 @@
+---
+description: Decision tree for handling common error scenarios
+globs:
+alwaysApply: true
+---
+
+# Error Handling Decision Tree
+
+This document provides a structured decision tree for handling common error scenarios in the project. Use this as a reference when encountering errors.
+
+## Decision Tree Implementation
+
+```javascript
+/**
+ * Error handling decision tree implementation
+ * @param {Object} error - The error object encountered
+ * @param {Object} context - Contextual information about where the error occurred
+ * @returns {Object} Resolution steps and action items
+ */
+function handleError(error, context) {
+  // Determine error category
+  const category = categorizeError(error);
+
+  // Log error to registry
+  logErrorToRegistry(error, category, context);
+
+  // Apply decision tree based on category
+  switch (category) {
+    case 'NETWORK':
+      return handleNetworkError(error, context);
+    case 'AUTHENTICATION':
+      return handleAuthError(error, context);
+    case 'PERMISSION':
+      return handlePermissionError(error, context);
+    case 'VALIDATION':
+      return handleValidationError(error, context);
+    case 'RESOURCE':
+      return handleResourceError(error, context);
+    case 'TOOL_CALL':
+      return handleToolCallError(error, context);
+    default:
+      return handleGenericError(error, context);
+  }
+}
+
+/**
+ * Categorizes an error based on its properties
+ * @param {Object} error - The error object to categorize
+ * @returns {string} The error category
+ */
+function categorizeError(error) {
+  if (error.code === 'ECONNREFUSED' || error.code === 'ENOTFOUND' || error.message.includes('network')) {
+    return 'NETWORK';
+  }
+
+  if (error.status === 401 || error.message.includes('auth') || error.message.includes('token')) {
+    return 'AUTHENTICATION';
+  }
+
+  if (error.status === 403 || error.message.includes('permission') || error.message.includes('access denied')) {
+    return 'PERMISSION';
+  }
+
+  if (error.status === 400 || error.message.includes('validation') || error.message.includes('invalid')) {
+    return 'VALIDATION';
+  }
+
+  if (error.status === 404 || error.status === 429 || error.message.includes('not found') || error.message.includes('limit')) {
+    return 'RESOURCE';
+  }
+
+  if (error.message.includes('tool call') || error.message.includes('maximum number')) {
+    return 'TOOL_CALL';
+  }
+
+  return 'GENERIC';
+}
+```
+
+## Error Categories and Resolution Patterns
+
+### Network Errors
+
+**Decision Tree:**
+```
+IF connection refused OR host not found THEN
+  IF using proxy THEN
+    → Check proxy configuration
+  ELSE IF accessing external API THEN
+    → Verify API status
+    → Check firewall rules
+  ELSE
+    → Verify local service is running
+    → Check network connectivity
+```
+
+**Implementation:**
+```javascript
+function handleNetworkError(error, context) {
+  const isProxyEnabled = context.config?.proxy;
+  const isExternalAPI = context.url && !context.url.includes('localhost');
+
+  if (isProxyEnabled) {
+    return {
+      category: 'NETWORK',
+      steps: [
+        'Check proxy configuration in .env file',
+        'Verify proxy server is running',
+        'Test direct connection without proxy'
+      ]
+    };
+  }
+
+  if (isExternalAPI) {
+    return {
+      category: 'NETWORK',
+      steps: [
+        `Check status of API: ${context.url}`,
+        'Verify API credentials are valid',
+        'Check firewall or VPN settings'
+      ]
+    };
+  }
+
+  return {
+    category: 'NETWORK',
+    steps: [
+      'Verify local service is running',
+      'Check network connectivity',
+      'Restart local development server'
+    ]
+  };
+}
+```
+
+### Authentication Errors
+
+**Decision Tree:**
+```
+IF token expired THEN
+  → Refresh token
+ELSE IF invalid credentials THEN
+  → Prompt for credentials re-entry
+  → Verify credential storage
+ELSE IF unauthorized client THEN
+  → Check client ID and secret
+  → Verify allowed scopes
+ELSE
+  → Review authentication flow
+```
+
+**Implementation:**
+```javascript
+function handleAuthError(error, context) {
+  const isExpiredToken = error.message.includes('expired');
+  const isInvalidCredentials = error.message.includes('invalid credentials');
+  const isUnauthorizedClient = error.message.includes('unauthorized client');
+
+  if (isExpiredToken) {
+    return {
+      category: 'AUTHENTICATION',
+      steps: [
+        'Refresh authentication token',
+        'Update token storage',
+        'Retry the operation with new token'
+      ]
+    };
+  }
+
+  if (isInvalidCredentials) {
+    return {
+      category: 'AUTHENTICATION',
+      steps: [
+        'Prompt for credentials re-entry',
+        'Verify credential storage mechanism',
+        'Check for encoding issues in credentials'
+      ]
+    };
+  }
+
+  if (isUnauthorizedClient) {
+    return {
+      category: 'AUTHENTICATION',
+      steps: [
+        'Check client ID and secret',
+        'Verify allowed scopes for client',
+        'Review API documentation for auth requirements'
+      ]
+    };
+  }
+
+  return {
+    category: 'AUTHENTICATION',
+    steps: [
+      'Review authentication flow',
+      'Check for auth headers in request',
+      'Verify token format and signing'
+    ]
+  };
+}
+```
+
+### Tool Call Errors
+
+**Decision Tree:**
+```
+IF maximum calls exceeded THEN
+  → Batch similar operations
+  → Prioritize critical operations
+  → Create continuation checkpoint
+ELSE IF invalid tool call THEN
+  → Check parameter formatting
+  → Verify tool availability
+ELSE IF tool execution failed THEN
+  → Check error message
+  → Verify permissions
+  → Try alternative approach
+```
+
+**Implementation:**
+```javascript
+function handleToolCallError(error, context) {
+  const isMaxCallsExceeded = error.message.includes('maximum') || error.message.includes('limit');
+  const isInvalidToolCall = error.message.includes('invalid') || error.message.includes('parameter');
+  const isExecutionFailed = error.message.includes('failed') || error.message.includes('execution');
+
+  if (isMaxCallsExceeded) {
+    return {
+      category: 'TOOL_CALL',
+      steps: [
+        'Batch similar operations in single calls',
+        'Prioritize critical operations',
+        'Document progress and create continuation point',
+        'Resume in a new session with clear continuation instructions'
+      ]
+    };
+  }
+
+  if (isInvalidToolCall) {
+    return {
+      category: 'TOOL_CALL',
+      steps: [
+        'Check parameter formatting and types',
+        'Verify tool availability in current context',
+        'Review tool documentation for correct usage',
+        'Try simplified parameters'
+      ]
+    };
+  }
+
+  if (isExecutionFailed) {
+    return {
+      category: 'TOOL_CALL',
+      steps: [
+        'Check specific error message details',
+        'Verify permissions for the operation',
+        'Try alternative approach or tool',
+        'Break operation into smaller steps'
+      ]
+    };
+  }
+
+  return {
+    category: 'TOOL_CALL',
+    steps: [
+      'Review the tool call syntax',
+      'Check for system limitations',
+      'Consider using lower-level tools',
+      'Document issue in error-registry.mdc'
+    ]
+  };
+}
+```
+
+## Integration Into Workflow
+
+To use this decision tree in your workflow:
+
+1. Import the decision tree module:
+
+```javascript
+const { handleError } = require('./error-decision-tree');
+```
+
+2. Wrap operations in try/catch blocks:
+
+```javascript
+try {
+  // Attempt operation
+  const result = await performOperation(params);
+  return result;
+} catch (error) {
+  // Use decision tree to handle the error
+  const resolution = handleError(error, {
+    operation: 'performOperation',
+    params,
+    context: { /* additional context */ }
+  });
+
+  // Log resolution
+  console.log(`Error resolution: ${resolution.category}`);
+  console.log('Steps:');
+  resolution.steps.forEach(step => console.log(`- ${step}`));
+
+  // Take action based on resolution
+  if (resolution.category === 'NETWORK' && resolution.steps.includes('Retry')) {
+    // Retry operation
+    return await performOperation(params);
+  }
+
+  // Handle failed resolution
+  throw new Error(`Operation failed: ${error.message}. See error-registry.mdc for resolution steps.`);
+}
+```
+
+## Decision Tree Visualization
+
+```
+Error
+├── Network
+│   ├── Connection Refused
+│   │   ├── Using Proxy → Check proxy configuration
+│   │   ├── External API → Verify API status
+│   │   └── Local Service → Verify service running
+│   └── Host Not Found
+│       ├── DNS Issue → Check DNS settings
+│       └── Wrong URL → Verify URL correctness
+├── Authentication
+│   ├── Token Expired → Refresh token
+│   ├── Invalid Credentials → Prompt for re-entry
+│   └── Unauthorized Client → Check client ID
+├── Permission
+│   ├── Access Denied → Check user permissions
+│   └── Resource Forbidden → Verify resource access
+├── Validation
+│   ├── Invalid Input → Fix input formatting
+│   └── Schema Mismatch → Update input schema
+├── Resource
+│   ├── Not Found → Verify resource exists
+│   └── Rate Limited → Implement backoff
+└── Tool Call
+    ├── Maximum Calls Exceeded → Batch operations
+    ├── Invalid Tool Call → Check parameters
+    └── Execution Failed → Check permissions
+```

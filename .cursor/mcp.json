@@ -1,0 +1,34 @@
+{
+	"mcpServers": {
+		"langgraph-docs-mcp": {
+			"command": "uvx",
+			"args": [
+				"--from",
+				"mcpdoc",
+				"mcpdoc",
+				"--urls",
+				"LangGraph:https://langchain-ai.github.io/langgraph/llms.txt",
+				"Cody:https://sourcegraph.com/docs/llms.txt",
+				"--transport",
+				"stdio"
+			]
+		},
+		"langgraph-docs-mcp-sse": {
+			"command": "uvx",
+			"args": [
+				"--from",
+				"mcpdoc",
+				"mcpdoc",
+				"--urls",
+				"LangGraph:https://langchain-ai.github.io/langgraph/llms.txt",
+				"Cody:https://sourcegraph.com/docs/llms.txt",
+				"--transport",
+				"sse",
+				"--port",
+				"8082",
+				"--host",
+				"localhost"
+			]
+		}
+	}
+}

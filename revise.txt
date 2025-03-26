@@ -1,0 +1,218 @@
+🤖 # Sovereign AI Development Blueprint
+
+---
+description: Strategic framework for building ethical, local-first AI systems
+globs:
+alwaysApply: true
+---
+
+# Development Lifecycle & Governance
+
+## Strategic Planning Layers
+
+### Foundation Layer
+- Map core system requirements
+- Draft architectural vision
+- Define ethical boundaries
+- Establish success metrics
+- Create resource allocation plan
+
+### Build Layer
+- Structure modular components
+- Implement core logic
+- Establish testing patterns
+- Document design decisions
+- Create feedback loops
+
+### Integration Layer
+- Connect system components
+- Validate data flows
+- Measure performance
+- Refine user experience
+- Document interactions
+
+## Project Phases
+
+### Discovery
+Icon: 🔍
+Focus: Understanding the problem space
+Deliverables:
+- Problem definition
+- User stories
+- Technical constraints
+- Resource assessment
+- Risk analysis
+
+### Architecture
+Icon: 📐
+Focus: System design and planning
+Deliverables:
+- Component diagrams
+- Data flow maps
+- Security model
+- Scaling strategy
+- Integration points
+
+### Development
+Icon: ⚙️
+Focus: Building core functionality
+Deliverables:
+- Working components
+- Test coverage
+- Documentation
+- Performance metrics
+- Security checks
+
+### Validation
+Icon: ⚖️
+Focus: Quality and compliance
+Deliverables:
+- Test results
+- Performance data
+- Security audit
+- User feedback
+- Compliance check
+
+### Deployment
+Icon: 🚀
+Focus: System availability
+Deliverables:
+- Release package
+- Monitoring setup
+- Backup systems
+- Recovery plans
+- Usage metrics
+
+## Progress Tracking
+
+### State Indicators
+🟣 Planning - Defining approach
+🔵 Active - Current focus
+🟡 Review - Needs assessment
+🟢 Complete - Ready for use
+⚪ Archived - Past reference
+
+### Priority Levels
+📍 Critical - Immediate attention
+📌 High - Next in line
+📎 Medium - Scheduled work
+🔗 Low - When possible
+
+## Core Principles
+
+### Development Standards
+1. Local-first architecture
+2. Privacy by design
+3. User autonomy
+4. Transparent operation
+5. Sustainable scaling
+
+### Code Quality
+1. Clear intent
+2. Minimal complexity
+3. Strong typing
+4. Comprehensive tests
+5. Thorough docs
+
+### Security Focus
+1. Data protection
+2. Access control
+3. Audit trails
+4. Threat modeling
+5. Regular review
+
+## Documentation Requirements
+
+### System Documentation
+- Architecture overview
+- Component specs
+- API references
+- Security model
+- Deployment guide
+
+### User Documentation
+- Setup guide
+- Usage examples
+- Best practices
+- Troubleshooting
+- Update process
+
+### Development Documentation
+- Code standards
+- Build process
+- Test coverage
+- Review checklist
+- Release protocol
+
+## Ethical Framework
+
+### Core Values
+1. User privacy
+2. Data sovereignty
+3. System transparency
+4. Ethical AI use
+5. Community benefit
+
+### Implementation Guidelines
+1. Privacy controls
+2. Data minimization
+3. User consent
+4. Clear disclosure
+5. Regular audits
+
+## Knowledge Management
+
+### Documentation Types
+1. Design decisions
+2. Implementation notes
+3. Problem solutions
+4. Learning resources
+5. Best practices
+
+### Organization Method
+1. Clear categories
+2. Version tracking
+3. Easy search
+4. Regular updates
+5. Cross-references
+
+## Success Metrics
+
+### Technical Metrics
+- Performance stats
+- Error rates
+- Test coverage
+- Build times
+- Resource usage
+
+### User Metrics
+- Satisfaction scores
+- Usage patterns
+- Feature adoption
+- Issue reports
+- Support needs
+
+### Project Metrics
+- Milestone completion
+- Quality metrics
+- Team velocity
+- Documentation coverage
+- Review feedback
+
+## Review Process
+
+### Code Review
+- Style compliance
+- Performance check
+- Security review
+- Test validation
+- Documentation check
+
+### System Review
+- Architecture alignment
+- Security compliance
+- Performance goals
+- User experience
+- Documentation quality
+
+This blueprint emphasizes practical implementation while maintaining high standards for development, security, and user privacy. It provides clear guidance while remaining flexible enough to adapt to specific project needs.

@@ -8,5 +8,6 @@ dependencies = [
     "gorilla-cli>=0.0.10",
     "langgraph-supervisor>=0.0.10",
     "langgraph-swarm>=0.0.7",
+    "mcp[cli]>=1.5.0",
     "pinecone>=6.0.2",
 ]

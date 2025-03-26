@@ -1,0 +1,80 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: Logs of key project decisions with context and rationale
+globs:
+alwaysApply: false
+---
+
+# Decision Logs
+
+This document tracks key project decisions to maintain a record of decision-making rationale and provide context for future reference.
+
+## Decision Log Format
+
+```markdown
+## [DECISION-ID]: Brief Title
+- Date: YYYY-MM-DD
+- Participants: [Names/Roles]
+- Status: [Implemented | Pending | Rejected | Superseded by DECISION-ID]
+
+### Context
+Brief description of the situation requiring a decision
+
+### Options Considered
+1. Option A: [Description]
+2. Option B: [Description]
+3. Option C: [Description]
+
+### Decision Criteria
+- Criterion 1: [Weight/Importance]
+- Criterion 2: [Weight/Importance]
+- Criterion 3: [Weight/Importance]
+
+### Selected Option
+Option [X] because [rationale]
+
+### Implementation Plan
+1. [First step]
+2. [Second step]
+3. [Third step]
+
+### Review Date
+YYYY-MM-DD (when we'll review the outcome of this decision)
+```
+
+## Project Decisions
+
+### DECISION-001: Enhanced Governance Framework Implementation
+- Date: 2023-03-23
+- Participants: AI Assistant, Project Lead
+- Status: Implemented
+
+#### Context
+The project needed a structured governance framework to standardize development practices and ensure consistent documentation across AI-assisted development workflows.
+
+#### Options Considered
+1. Standard GitHub-based documentation only
+2. Enhanced governance framework with structured templates and decision trees
+3. Minimal documentation with ad-hoc processes
+
+#### Decision Criteria
+- Scalability: High importance
+- Maintainability: High importance
+- Implementation effort: Medium importance
+- Learning curve: Medium importance
+
+#### Selected Option
+Option 2 (Enhanced governance framework) because it provides the best balance of structure and flexibility, with clear processes that can scale as the project grows while maintaining consistent quality.
+
+#### Implementation Plan
+1. Create enhanced-governance-framework.mdc document
+2. Create supporting template files
+3. Implement first decision tree for common scenarios
+4. Schedule effectiveness review
+
+#### Review Date
+2023-04-23

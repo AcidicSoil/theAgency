@@ -1,0 +1,18 @@
+curl -X GET http://localhost:11434 -H "Origin: https://c976-2601-2c4-4480-c80-81fd-69c7-acd6-43bb.ngrok-free.app" -H "Access-Control-Request-Method: GET" -I
+
+
+curl https://api.openai.com/v1/chat/completions -H "Content-Type: application/json" -H "Authorization: Bearer ollama" -d "{ \"messages\": [ { \"role\": \"system\", \"content\": \"You are a test assistant.\" }, { \"role\": \"user\", \"content\": \"Testing. Just say hi and nothing else.\" } ], \"model\": \"o3-mini\" }"
+
+
+
+
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "llama2",
+    "messages": [
+      {"role": "system", "content": "You are a helpful assistant."},
+      {"role": "user", "content": "Hello!"}
+    ]
+  }' \
+  https://c976-2601-2c4-4480-c80-81fd-69c7-acd6-43bb.ngrok-free.app/v1/chat/completions

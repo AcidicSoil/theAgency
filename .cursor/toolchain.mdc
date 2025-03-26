@@ -1,0 +1,191 @@
+---
+description: Documentation of all tools, configurations and utilities used in the project
+globs:
+alwaysApply: false
+---
+
+# Toolchain Documentation
+
+This document catalogs all tools, configurations, and utilities used in the project, including setup instructions and best practices.
+
+## Tool Documentation Format
+
+```markdown
+## [Tool Name]
+
+### Purpose
+What this tool is used for
+
+### Configuration
+How the tool is configured in this project
+
+### Usage
+How to use the tool effectively
+
+### Examples
+Example commands or code
+
+### Troubleshooting
+Common issues and solutions
+```
+
+## Development Tools
+
+### Python Virtual Environment
+
+#### Purpose
+Isolated Python environment for project dependencies.
+
+#### Configuration
+- Virtual environment location: `./venv/`
+- Python version: 3.10+
+- Requirements: See `pyproject.toml`
+
+#### Usage
+```bash
+# Create virtual environment
+python -m venv venv
+
+# Activate virtual environment
+# On Windows:
+venv\Scripts\activate
+# On Unix/MacOS:
+source venv/bin/activate
+
+# Install dependencies
+pip install -e .
+```
+
+#### Examples
+```bash
+# Run a Python script with the virtual environment
+venv/bin/python tools/llm_api.py --prompt "Hello, world!" --provider "anthropic"
+```
+
+#### Troubleshooting
+- If activation fails, check Python version compatibility
+- If package installation fails, try updating pip: `venv/bin/python -m pip install --upgrade pip`
+
+### Screenshot Utility
+
+#### Purpose
+Capture screenshots of web pages for verification and testing.
+
+#### Configuration
+- Located in: `tools/screenshot_utils.py`
+- Dependencies: Playwright
+
+#### Usage
+```bash
+venv/bin/python tools/screenshot_utils.py URL [--output OUTPUT] [--width WIDTH] [--height HEIGHT]
+```
+
+#### Examples
+```bash
+# Take a screenshot of a website
+venv/bin/python tools/screenshot_utils.py https://example.com --output example.png --width 1280 --height 720
+
+# Take a screenshot and verify with LLM
+screenshot_path=$(venv/bin/python tools/screenshot_utils.py https://example.com --output example.png)
+venv/bin/python tools/llm_api.py --prompt "What is on this webpage?" --provider "openai" --image $screenshot_path
+```
+
+#### Troubleshooting
+- If Playwright fails, try installing browsers: `playwright install`
+- For SSL errors, check system certificates or use `--ignore-https-errors`
+
+### LLM API
+
+#### Purpose
+Interface with various LLM providers for text and image processing.
+
+#### Configuration
+- Located in: `tools/llm_api.py`
+- Supported providers:
+  - OpenAI (default, model: gpt-4o)
+  - Azure OpenAI
+  - DeepSeek
+  - Anthropic
+  - Gemini
+  - Local LLM
+
+#### Usage
+```bash
+venv/bin/python ./tools/llm_api.py --prompt "Your prompt here" --provider "provider_name" [--image path/to/image]
+```
+
+#### Examples
+```bash
+# Basic text query with OpenAI
+venv/bin/python ./tools/llm_api.py --prompt "What is the capital of France?"
+
+# Image analysis with Anthropic
+venv/bin/python ./tools/llm_api.py --prompt "Describe this image in detail" --provider "anthropic" --image screenshot.png
+```
+
+#### Troubleshooting
+- Check API keys in environment variables
+- For rate limit errors, implement exponential backoff
+- For context length errors, try breaking prompts into smaller chunks
+
+## MCP Tools
+
+### LangGraph Documentation MCP
+
+#### Purpose
+Access and search LangGraph documentation.
+
+#### Configuration
+- Located in: `.cursor/lang-graph.mdc`
+- Triggered by: Any question about LangGraph
+
+#### Usage
+1. Call `list_doc_sources` to get available documentation
+2. Call `fetch_docs` to read documentation content
+3. Use fetched documentation to answer questions
+
+#### Examples
+```javascript
+// Sample workflow
+const docSources = await listDocSources();
+const llmsTxt = await fetchDocs(docSources[0].url);
+const relevantUrls = extractRelevantUrls(llmsTxt, userQuestion);
+const docContent = await fetchDocs(relevantUrls[0]);
+return generateAnswer(docContent, userQuestion);
+```
+
+#### Troubleshooting
+- If documentation URLs are inaccessible, check network connectivity
+- For parsing errors, verify the structure of returned documents
+
+## CI/CD Tools
+
+### GitHub Actions
+
+#### Purpose
+Automated testing, building, and deployment.
+
+#### Configuration
+- Workflows defined in: `.github/workflows/`
+- Main workflows:
+  - `ci.yml`: Runs tests on pull requests
+  - `deploy.yml`: Deploys to production on main branch
+
+#### Usage
+Workflows run automatically based on trigger events. Manual runs can be initiated from GitHub UI.
+
+#### Examples
+```yaml
+# Example workflow step
+- name: Run Tests
+  run: |
+    python -m venv venv
+    source venv/bin/activate
+    pip install -e .
+    pytest
+```
+
+#### Troubleshooting
+- Check workflow logs in GitHub Actions tab
+- For failed builds, inspect step outputs for specific errors
+- Test workflows locally with `act` tool before pushing

@@ -1,0 +1,116 @@
+---
+description: Audit trail for data access operations in the project
+globs:
+alwaysApply: false
+---
+
+# Data Access Log
+
+This document provides an audit trail of data access operations, particularly for sensitive or secured data, to maintain transparency and security in the project.
+
+## Data Access Entry Format
+
+```
+- [YYYY-MM-DD HH:MM:SS] | [Operation] | Fields: [field1, field2, ...]
+```
+
+## Access Log
+
+### Sensitive Configuration
+
+- 2023-03-23 21:30:00 | readConfig | Fields: api_url, timeout, retries
+- 2023-03-23 18:45:23 | updateConfig | Fields: api_url, debug_mode
+
+### Authentication Data
+
+- 2023-03-23 14:20:15 | validateToken | Fields: token_id, expiration
+- 2023-03-22 09:15:42 | refreshToken | Fields: user_id, refresh_token
+
+### User Data
+
+- 2023-03-21 16:30:12 | fetchUserPreferences | Fields: user_id, theme_preference, notification_settings
+- 2023-03-20 11:45:38 | updateUserProfile | Fields: user_id, display_name, email_visibility
+
+## Security Policies
+
+### Data Sanitization
+
+All sensitive data must be sanitized before logging or display using the sanitizeData function:
+
+```javascript
+function sanitizeData(data, sensitiveFields = ['password', 'token', 'key']) {
+  const sanitized = JSON.parse(JSON.stringify(data));
+
+  for (const field of sensitiveFields) {
+    if (sensitized[field]) {
+      sensitized[field] = '*******';
+    }
+  }
+
+  // Log data access
+  logDataAccess('sanitizeData', Object.keys(data));
+
+  return sanitized;
+}
+```
+
+### Data Access Logging
+
+All operations that access sensitive data must be logged:
+
+```javascript
+function logDataAccess(operation, fields) {
+  const timestamp = new Date().toISOString();
+  const logEntry = `- ${timestamp} | ${operation} | Fields: ${fields.join(', ')}\n`;
+
+  fs.appendFileSync('data-access-log.mdc', logEntry);
+
+  // Also log to console in development mode
+  if (process.env.NODE_ENV === 'development') {
+    console.log(`[DATA ACCESS] ${logEntry}`);
+  }
+}
+```
+
+### Access Control
+
+Data access operations should implement proper access control:
+
+```javascript
+function accessData(dataType, fields, context) {
+  // Check permissions
+  if (!hasPermission(context.user, dataType, 'read')) {
+    logDataAccess(`ACCESS_DENIED:${dataType}`, fields);
+    throw new Error(`Access denied to ${dataType}`);
+  }
+
+  // Log successful access
+  logDataAccess(`READ:${dataType}`, fields);
+
+  // Return data
+  return fetchData(dataType, fields);
+}
+```
+
+## Compliance Requirements
+
+### Retention Policy
+
+- Data access logs are retained for 90 days
+- Logs are archived after retention period
+- Archives are stored for 1 year
+
+### Regular Audits
+
+- Weekly automated analysis for unusual patterns
+- Monthly manual review of access logs
+- Quarterly compliance review
+
+### Incident Response
+
+In case of unauthorized data access:
+
+1. Document the incident in the log with `INCIDENT:` prefix
+2. Notify the security team
+3. Initiate access token rotation if applicable
+4. Update access controls as needed

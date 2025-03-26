@@ -5,27 +5,14 @@ build/
 dist/
 wheels/
 *.egg-info
-
 # Virtual environments
 .venv
 .env
-.cursorrules
-.cursorignore
-.cursor/
+node_modules
 .archive/
-
-
-
+agents/PromptWizard/
 ospain2.cursor.bak/
-
-ollama-deep-researcher-ts/
-
-ollama-deep-researcher-py/
-
-ollama-deep-researcher-py/
 
 langgraph-swarm-py/
 
 langgraph-supervisor-py/
-
-langgraph-swarm-py/

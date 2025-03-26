@@ -1,0 +1,400 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+description: Comprehensive framework for structured AI-assisted development
+globs:
+alwaysApply: true
+---
+
+# Enhanced Project Governance Framework - Fast Track Guidelines
+
+This document provides structured guidelines to maintain system integrity while accelerating development through standardized AI collaboration patterns. Use these frameworks to ensure consistent governance across all project activities.
+
+## Decision Management
+
+### Decision Tree Implementation
+```javascript
+// Standard decision tree implementation pattern
+function evaluateDecision(context) {
+  if (context.type === 'error') {
+    // Follow error-handling tree → @tool-call-error-handler.mdc
+    return handleError(context);
+  } else if (context.type === 'ambiguity') {
+    // Evaluate options against project priorities
+    return evaluateOptions(context.options, PRIORITY_MATRIX);
+  } else if (context.type === 'uncertainty') {
+    // Document 3 possible approaches before choosing path
+    return documentApproachesAndSelect(context);
+  }
+
+  // Default handling
+  return standardDecisionProcess(context);
+}
+```
+
+### Decision Documentation
+```markdown
+# Decision Log Entry
+
+## Context
+[Brief description of the situation requiring a decision]
+
+## Options Considered
+1. Option A: [Description]
+2. Option B: [Description]
+3. Option C: [Description]
+
+## Decision Criteria
+- Criterion 1: [Weight/Importance]
+- Criterion 2: [Weight/Importance]
+
+## Selected Option
+Option [X] because [rationale]
+
+## Implementation Plan
+1. [First step]
+2. [Second step]
+
+## Review Date
+[YYYY-MM-DD]
+```
+
+## Version Control Integration
+
+### Standard Formats
+
+| Item | Format | Example |
+|------|--------|---------|
+| Commit messages | `[MODE][TASK-ID] Brief description` | `[🔧][TASK-123] Fix authentication timeout` |
+| Branch names | `[mode]-[task-id]-[descriptor]` | `eng-task123-auth-fix` |
+| PR titles | `[MODE][TASK-ID] Feature/fix title` | `[🎨][TASK-456] New dashboard layout` |
+
+### Pull Request Template
+```markdown
+## Changes
+[Summary of changes implemented]
+
+## Task Reference
+[TASK-ID]
+
+## Testing Performed
+- [ ] Unit tests
+- [ ] Integration tests
+- [ ] Manual verification
+
+## Documentation
+- [ ] Documentation updated
+- [ ] API docs updated
+- [ ] Changelog entry added
+
+## Screenshots/Recordings
+[If applicable]
+```
+
+## Time Management
+
+### Task Time Allocation
+
+| Mode | Time Limit | Example Tracking |
+|------|------------|-----------------|
+| 🎨 Design | 2 hours max | `[2023-07-15 14:30] Started design exploration` |
+| 🔧 Engineering | 3 hours max | `[2023-07-15 09:15] Started implementing auth fix` |
+| 🧪 Testing | 1/3 of implementation time | `[2023-07-15 15:45] Started test suite development` |
+
+### Timeboxing Implementation
+```javascript
+// Template for timeboxed task execution
+function timeboxTask(taskFn, maxDurationMinutes) {
+  const startTime = Date.now();
+  const endTime = startTime + (maxDurationMinutes * 60 * 1000);
+
+  // Log start in scratchpad
+  log('INFO', `[${new Date().toISOString()}] Started task: ${taskFn.name}`);
+
+  try {
+    // Execute task with timeout awareness
+    const result = taskFn({
+      getRemainingTime: () => Math.max(0, endTime - Date.now()),
+      isTimeExpired: () => Date.now() >= endTime
+    });
+
+    return result;
+  } finally {
+    // Log completion in scratchpad
+    log('INFO', `[${new Date().toISOString()}] Completed task: ${taskFn.name}`);
+    log('INFO', `Duration: ${Math.round((Date.now() - startTime) / 1000 / 60)} minutes`);
+  }
+}
+```
+
+## Knowledge Persistence
+
+### Session Insights Capture
+```markdown
+# Session Learnings [YYYY-MM-DD]
+
+## What Worked Well
+- [Insight 1] #INSIGHT
+- [Insight 2]
+
+## What Could Be Improved
+- [Improvement 1]
+- [Improvement 2] #INSIGHT
+
+## Action Items
+- [ ] [Action 1]
+- [ ] [Action 2]
+
+## Knowledge Base References
+- [KB:AUTHENTICATION:TOKEN-HANDLING]
+- [KB:UI:RESPONSIVE-DESIGN]
+```
+
+### Cross-Reference Format
+```
+[KB:TOPIC:SUBTOPIC]
+```
+
+## Stakeholder Communication
+
+### Update Templates By Stakeholder Type
+
+**Technical Update**
+```markdown
+# Technical Update [YYYY-MM-DD]
+
+## Implementation Changes
+- [Change 1]
+- [Change 2]
+
+## Technical Debt
+- [Item 1] - Impact: [High/Medium/Low]
+- [Item 2] - Impact: [High/Medium/Low]
+
+## Architecture Decisions
+- [Decision 1] - Rationale: [Brief explanation]
+```
+
+**Executive Update**
+```markdown
+# Executive Update [YYYY-MM-DD]
+
+## Progress Metrics
+- Tasks completed: [X/Y]
+- Velocity: [Z tasks/week]
+- Current phase: [Phase name]
+
+## Blockers
+- [Blocker 1] - Impact: [Description]
+- [Blocker 2] - Impact: [Description]
+
+## Resource Needs
+- [Resource 1]: [Justification]
+- [Resource 2]: [Justification]
+```
+
+## Error Recovery
+
+### Error Documentation
+```javascript
+// Standardized error logging pattern
+function logError(error, context) {
+  const errorEntry = {
+    timestamp: new Date().toISOString(),
+    errorCode: error.code || 'UNKNOWN',
+    message: error.message,
+    stack: error.stack,
+    context: context,
+    recoverySteps: suggestRecoverySteps(error)
+  };
+
+  // Log to error registry
+  fs.appendFileSync('error-registry.mdc',
+    `\n\n## Error: ${errorEntry.errorCode}\n` +
+    `- Timestamp: ${errorEntry.timestamp}\n` +
+    `- Message: ${errorEntry.message}\n` +
+    `- Context: ${JSON.stringify(errorEntry.context)}\n` +
+    `- Recovery:\n  ${errorEntry.recoverySteps.join('\n  ')}\n`
+  );
+
+  return errorEntry;
+}
+
+// Recovery steps suggestion
+function suggestRecoverySteps(error) {
+  // Logic to determine appropriate recovery steps based on error type
+  // ...
+
+  return [
+    '1. [Step one]',
+    '2. [Step two]',
+    '3. [Step three]'
+  ];
+}
+```
+
+### Backup Before Changes
+```bash
+# Create timestamped backup of critical file before changes
+cp important-file.js important-file.js.backup-$(date +%Y%m%d%H%M%S)
+
+# Verify backup exists
+ls -la important-file.js*
+
+# Proceed with changes to original file
+# ...
+
+# Restore from backup if needed
+# cp important-file.js.backup-20230715142830 important-file.js
+```
+
+## Resource Allocation
+
+### Tool Selection Matrix
+
+| Complexity | Tool Type | Documentation |
+|------------|-----------|---------------|
+| Low | Built-in tools | Document in code comments |
+| Medium | Configured MCP tools | Document in @toolchain.mdc |
+| High | Specialized tools | Full integration docs + @toolchain.mdc |
+
+### Performance Evaluation
+```javascript
+// Benchmark function for solution evaluation
+function benchmarkSolution(solutionFn, testCases, baselineFn = null) {
+  const results = {
+    solution: {
+      totalTime: 0,
+      results: []
+    },
+    baseline: baselineFn ? {
+      totalTime: 0,
+      results: []
+    } : null
+  };
+
+  // Run test cases for solution
+  for (const testCase of testCases) {
+    const startTime = performance.now();
+    const result = solutionFn(testCase);
+    const endTime = performance.now();
+
+    results.solution.results.push({
+      testCase,
+      result,
+      time: endTime - startTime
+    });
+
+    results.solution.totalTime += (endTime - startTime);
+  }
+
+  // Run baseline if provided
+  if (baselineFn) {
+    // Similar implementation for baseline
+    // ...
+  }
+
+  return results;
+}
+```
+
+## Continuous Improvement
+
+### Rule Set Review
+```markdown
+# Rule Set Review [YYYY-MM-DD]
+
+## Rules Evaluated
+- [Rule 1] - Status: [Keep/Modify/Remove]
+- [Rule 2] - Status: [Keep/Modify/Remove]
+
+## Metrics
+- Before implementation: [Metric 1: Value]
+- After implementation: [Metric 1: Value]
+
+## Changes Made
+- [Change 1] - Rationale: [Explanation]
+- [Change 2] - Rationale: [Explanation]
+
+## Next Review Date
+[YYYY-MM-DD]
+```
+
+## Context Switching
+
+### Handoff Documentation
+```markdown
+# Handoff Document [YYYY-MM-DD]
+
+## Current State
+- [Current state point 1]
+- [Current state point 2]
+- [Current state point 3]
+
+## Next Steps
+- [ ] [Next step 1]
+- [ ] [Next step 2]
+- [ ] [Next step 3]
+
+## Open Questions
+- [Question 1]
+- [Question 2]
+
+## Resumption Point
+#CONTINUE from [specific point or file]
+```
+
+## Ethical Guidelines
+
+### Data Handling Protocol
+```javascript
+// Sensitive data sanitization function
+function sanitizeData(data, sensitiveFields = ['password', 'token', 'key']) {
+  const sanitized = JSON.parse(JSON.stringify(data));
+
+  for (const field of sensitiveFields) {
+    if (sanitized[field]) {
+      sanitized[field] = '*******';
+    }
+  }
+
+  // Log data access
+  logDataAccess('sanitizeData', Object.keys(data));
+
+  return sanitized;
+}
+
+// Data access logging
+function logDataAccess(operation, fields) {
+  fs.appendFileSync('data-access-log.mdc',
+    `- ${new Date().toISOString()} | ${operation} | Fields: ${fields.join(', ')}\n`
+  );
+}
+```
+
+### AI Usage Boundaries
+```markdown
+# AI Generated Solution
+
+## Solution Purpose
+[Brief description of what this solution accomplishes]
+
+## AI Contribution
+- [Component 1] #AI-GENERATED
+- [Component 2] #AI-GENERATED
+
+## Human Review
+- [ ] Security implications reviewed
+- [ ] Edge cases considered
+- [ ] Performance impact assessed
+- [ ] Bias assessment completed
+
+## Reviewer
+[Name/ID of human reviewer]
+
+## Review Date
+[YYYY-MM-DD]
+```

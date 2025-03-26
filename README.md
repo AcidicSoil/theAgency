@@ -56,7 +56,7 @@ The governance framework integrates with your development workflow through:
 
 ## Framework Maintenance
 
-The framework itself should be reviewed periodically as scheduled in `framework-review-schedule.mdc`. The first framework effectiveness review is scheduled for April 23, 2025.
+The framework itself should be reviewed periodically as scheduled in `framework-review-schedule.mdc`. The first framework effectiveness review is scheduled for April 23, 2023.
 
 ## License
 

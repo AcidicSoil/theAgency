@@ -1,0 +1,135 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+---
+description: Key metrics tracking project progress, quality, and performance
+globs:
+alwaysApply: false
+---
+
+# Project Metrics
+
+This document tracks key metrics for the project to measure progress, quality, and performance over time.
+
+## Metrics Dashboard
+
+| Metric | Current Value | Target | Trend | Last Updated |
+|--------|--------------|--------|-------|-------------|
+| Code Coverage | 78% | 85% | ↗️ | 2023-03-23 |
+| Build Time | 4.5 min | < 3 min | ↘️ | 2023-03-23 |
+| Open Issues | 12 | < 10 | ↘️ | 2023-03-23 |
+| Documentation Completeness | 65% | 90% | ↗️ | 2023-03-23 |
+| Test Pass Rate | 96% | > 98% | ↗️ | 2023-03-23 |
+
+## Progress Metrics
+
+### Task Completion
+
+```
+Week 11 (2023-03-17 to 2023-03-23):
+- Tasks completed: 14/18
+- Completion rate: 78%
+- Blocked tasks: 2
+- Carried over: 4
+
+Week 10 (2023-03-10 to 2023-03-16):
+- Tasks completed: 15/17
+- Completion rate: 88%
+- Blocked tasks: 1
+- Carried over: 2
+```
+
+### Milestone Progress
+
+| Milestone | Progress | Status | Due Date |
+|-----------|----------|--------|----------|
+| Enhanced Governance Framework | 25% | 🟡 In Progress | 2023-04-15 |
+| Core API Implementation | 80% | 🟡 In Progress | 2023-04-01 |
+| UI Component Library | 60% | 🟡 In Progress | 2023-04-30 |
+| Documentation Overhaul | 30% | 🟡 In Progress | 2023-05-15 |
+
+## Quality Metrics
+
+### Code Quality
+
+| Metric | Value | Threshold | Status |
+|--------|-------|-----------|--------|
+| ESLint Errors | 8 | < 5 | ❌ |
+| ESLint Warnings | 24 | < 20 | ❌ |
+| Code Duplication | 4.2% | < 5% | ✅ |
+| Cognitive Complexity | 15.3 | < 15 | ❌ |
+| TypeScript Strict Mode | Enabled | Enabled | ✅ |
+
+### Test Coverage
+
+| Component | Coverage | Threshold | Status |
+|-----------|----------|-----------|--------|
+| Core | 86% | 85% | ✅ |
+| UI | 72% | 75% | ❌ |
+| API | 82% | 80% | ✅ |
+| Utilities | 91% | 90% | ✅ |
+
+## Performance Metrics
+
+### Build Performance
+
+| Metric | Value | Target | Status |
+|--------|-------|--------|--------|
+| Development Build Time | 1.5s | < 2s | ✅ |
+| Production Build Time | 4.5min | < 3min | ❌ |
+| Bundle Size (gzip) | 256KB | < 250KB | ❌ |
+| Lighthouse Performance | 87 | > 90 | ❌ |
+
+### Runtime Performance
+
+| Metric | Value | Target | Status |
+|--------|-------|--------|--------|
+| First Contentful Paint | 1.2s | < 1s | ❌ |
+| Time to Interactive | 2.8s | < 2.5s | ❌ |
+| Total Blocking Time | 180ms | < 200ms | ✅ |
+| Cumulative Layout Shift | 0.02 | < 0.1 | ✅ |
+
+## Metric Collection Scripts
+
+### Code Coverage Collection
+
+```javascript
+// Script to gather and update code coverage metrics
+function updateCodeCoverageMetrics() {
+  const coverageData = JSON.parse(fs.readFileSync('./coverage/coverage-summary.json', 'utf8'));
+
+  const metrics = {
+    total: coverageData.total.lines.pct,
+    components: {
+      core: coverageData.core.lines.pct,
+      ui: coverageData.ui.lines.pct,
+      api: coverageData.api.lines.pct,
+      utilities: coverageData.utilities.lines.pct
+    },
+    timestamp: new Date().toISOString()
+  };
+
+  // Update metrics in project-metrics.mdc
+  updateMetricValue('Code Coverage', metrics.total);
+  updateComponentMetric('Core', 'Coverage', metrics.components.core);
+  updateComponentMetric('UI', 'Coverage', metrics.components.ui);
+  updateComponentMetric('API', 'Coverage', metrics.components.api);
+  updateComponentMetric('Utilities', 'Coverage', metrics.components.utilities);
+
+  console.log(`Updated code coverage metrics: ${metrics.total}%`);
+}
+```
+
+## Visualization
+
+```
+Code Coverage Trend:
+Week 1: ███████░░░ 70%
+Week 2: ███████░░░ 71%
+Week 3: ███████▒░░ 73%
+Week 4: ███████▓░░ 75%
+Week 5: ████████░░ 78%
+Target: ████████▓░ 85%
+```
