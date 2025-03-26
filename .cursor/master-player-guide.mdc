@@ -1,7 +1,7 @@
 ---
 description: Strategic commands and prompts for efficient codebase navigation and task execution
 globs: 
-alwaysApply: true
+alwaysApply: false
 ---
 
 # Master Player Guide - Fast Track Commands
