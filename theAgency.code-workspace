@@ -4,23 +4,10 @@
 			"path": "."
 		},
 		{
-			"path": "../ollama-deep-researcher-ts"
-		},
-		{
-			"path": "../PromptWizard"
-		},
-		{
 			"path": "../single-file-agents"
-		},
-		{
-			"path": "../system-prompts-and-models-of-ai-tools"
 		}
 	],
 	"settings": {
-		"CodeGPT.apiKey": "Ollama",
-		"editor.hover.delay": 5000,
-		"workbench.hover.delay": 2000,
-		"workbench.sash.hoverDelay": 1500,
-		"editor.hover.hidingDelay": 1500
+		"CodeGPT.apiKey": "Ollama"
 	}
 }
